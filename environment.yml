@@ -1,0 +1,18 @@
+name: defiende-servidor
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - numpy==2.4.4
+      - pandas==3.0.2
+      - scikit-learn==1.8.0
+      - joblib==1.5.3
+      - mlflow==3.17.2
+      - dvc==3.67.1
+      - huggingface_hub>=0.30
+      - PyYAML==6.0.3
+      - matplotlib==3.10.8
+      - nbformat==5.11.1
+      - ipykernel==7.4.0

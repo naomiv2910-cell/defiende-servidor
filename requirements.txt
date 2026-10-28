@@ -1,0 +1,12 @@
+# Probado con Python 3.12. Fija estas versiones para que v1/v2 se puedan cargar al recuperarlas.
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.8.0
+joblib==1.5.3
+mlflow==3.17.2
+dvc==3.67.1
+huggingface_hub>=0.30
+PyYAML==6.0.3
+matplotlib==3.10.8
+nbformat==5.11.1
+ipykernel==7.4.0

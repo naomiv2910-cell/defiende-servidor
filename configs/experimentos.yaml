@@ -1,0 +1,42 @@
+# Cuatro configuraciones, dos familias. Cada una cambia UNA cosa respecto a su referencia.
+seed: 42
+experiments:
+  - id: E1
+    name: logistica_base
+    family: regresion_logistica
+    model: LogisticRegression
+    scale: true
+    params: {C: 1.0, max_iter: 1000, class_weight: null}
+    hypothesis: >
+      Referencia sencilla. Un modelo lineal con variables escaladas separa razonablemente
+      normal/ataque; esperamos recall alto pero FPR notable porque el entrenamiento tiene mas ataques que trafico normal.
+    change: Ninguno (linea base).
+  - id: E2
+    name: logistica_balanceada
+    family: regresion_logistica
+    model: LogisticRegression
+    scale: true
+    params: {C: 1.0, max_iter: 1000, class_weight: balanced}
+    hypothesis: >
+      Ponderar las clases por frecuencia inversa reduce la tasa de falsos positivos
+      (trafico normal marcado como ataque) a costa de algo de recall.
+    change: class_weight null -> balanced (respecto a E1).
+  - id: E3
+    name: arbol_decision
+    family: arboles
+    model: DecisionTreeClassifier
+    scale: false
+    params: {max_depth: 10, min_samples_leaf: 5, class_weight: null}
+    hypothesis: >
+      Un arbol captura interacciones no lineales y umbrales (p. ej. ct_state_ttl, sttl) que el modelo lineal no ve,
+      mejorando macro-F1 y FPR.
+    change: Cambio de familia (lineal -> arbol).
+  - id: E4
+    name: bosque_aleatorio
+    family: arboles
+    model: RandomForestClassifier
+    scale: false
+    params: {n_estimators: 100, max_depth: 18, min_samples_leaf: 3, class_weight: balanced_subsample, n_jobs: -1}
+    hypothesis: >
+      Promediar muchos arboles reduce la varianza del arbol unico y mejora recall con FPR controlada.
+    change: Arbol individual -> ensamble de 100 arboles (respecto a E3).
