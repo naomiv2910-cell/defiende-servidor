@@ -1,0 +1,141 @@
+{
+  "fuentes": {
+    "C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_training-set.csv": {
+      "ruta": "data/raw/C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_training-set.csv",
+      "fuente": "UNSW-NB15 (UNSW Canberra). Copia fija (mirror de terceros) enlazada en el taller; atribución: página oficial de UNSW.",
+      "fecha_descarga": "2026-10-28",
+      "sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
+      "sha256_esperado_anexo": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
+      "coincide_con_anexo": true,
+      "filas": 175341,
+      "filas_esperadas": 175341,
+      "filas_coinciden": true,
+      "columnas": 45,
+      "clases_label": {
+        "0": 56000,
+        "1": 119341
+      },
+      "pct_ataque": 0.6806,
+      "faltantes_total": 0,
+      "columnas_con_faltantes": {},
+      "tipos": {
+        "int64": 30,
+        "float64": 11,
+        "str": 4
+      }
+    },
+    "C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_testing-set.csv": {
+      "ruta": "data/raw/C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_testing-set.csv",
+      "fuente": "UNSW-NB15 (UNSW Canberra). Copia fija (mirror de terceros) enlazada en el taller; atribución: página oficial de UNSW.",
+      "fecha_descarga": "2026-10-28",
+      "sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+      "sha256_esperado_anexo": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+      "coincide_con_anexo": true,
+      "filas": 82332,
+      "filas_esperadas": 82332,
+      "filas_coinciden": true,
+      "columnas": 45,
+      "clases_label": {
+        "0": 37000,
+        "1": 45332
+      },
+      "pct_ataque": 0.5506,
+      "faltantes_total": 0,
+      "columnas_con_faltantes": {},
+      "tipos": {
+        "int64": 30,
+        "float64": 11,
+        "str": 4
+      }
+    }
+  },
+  "duplicados_train": {
+    "filas_duplicadas_extra": 74301,
+    "grupos_con_duplicados": 9748,
+    "filas_en_grupos_duplicados": 84049,
+    "grupo_mas_grande": 415,
+    "grupos_contradictorios": 229,
+    "filas_en_grupos_contradictorios": 940
+  },
+  "duplicados_test": {
+    "filas_duplicadas_extra": 28386,
+    "grupos_con_duplicados": 6318,
+    "filas_en_grupos_duplicados": 34704,
+    "grupo_mas_grande": 88,
+    "grupos_contradictorios": 6,
+    "filas_en_grupos_contradictorios": 14
+  },
+  "politica_limpieza": "No se eliminan filas (los datos se conservan tal como se publicaron). Los duplicados por entradas se agrupan y NUNCA se reparten entre train y val. Los grupos con etiquetas contradictorias se conservan y se reportan; su presencia pone un techo a la métrica alcanzable. Imputación (mediana / moda), escalado y codificación one-hot se ajustan solo con entrenamiento dentro de un Pipeline.",
+  "variables_usadas": [
+    "dur",
+    "proto",
+    "service",
+    "state",
+    "spkts",
+    "dpkts",
+    "sbytes",
+    "dbytes",
+    "rate",
+    "sttl",
+    "dttl",
+    "sload",
+    "dload",
+    "sloss",
+    "dloss",
+    "sinpkt",
+    "dinpkt",
+    "sjit",
+    "djit",
+    "swin",
+    "stcpb",
+    "dtcpb",
+    "dwin",
+    "tcprtt",
+    "synack",
+    "ackdat",
+    "smean",
+    "dmean",
+    "trans_depth",
+    "response_body_len",
+    "ct_srv_src",
+    "ct_state_ttl",
+    "ct_dst_ltm",
+    "ct_src_dport_ltm",
+    "ct_dst_sport_ltm",
+    "ct_dst_src_ltm",
+    "is_ftp_login",
+    "ct_ftp_cmd",
+    "ct_flw_http_mthd",
+    "ct_src_ltm",
+    "ct_srv_dst",
+    "is_sm_ips_ports"
+  ],
+  "variables_excluidas": [
+    "label",
+    "attack_cat",
+    "id"
+  ],
+  "particiones": {
+    "semilla": 42,
+    "metodo": "StratifiedGroupKFold(n_splits=5, shuffle=True), grupos = hash de variables predictoras, primer pliegue = validacion",
+    "filas_train": 140272,
+    "filas_val": 35069,
+    "pct_ataque_train": 0.6806,
+    "pct_ataque_val": 0.6806,
+    "grupos_compartidos_train_val": 0,
+    "sha256_ids_train": "543906211dd9396769d7859d16c438ee8fbb256a69d8d342e4197419b300183f",
+    "sha256_ids_val": "02caa3ae287802d534aa3b7382c29d6d7f1374a108c2699ad8806558962166c2",
+    "sha256_train_csv": "870177afa2462803dfc13130dc91c035a4aa7e0d1ae2710eb975d53ac369e7f1",
+    "sha256_val_csv": "06eff4012517aba974dbc5d004c057f456a1bf92ed41de9503aecf586cdbbf65"
+  },
+  "cruces_entre_particiones": {
+    "filas_test": 82332,
+    "filas_test_con_entrada_en_train": 6514,
+    "filas_test_con_entrada_en_val": 2027,
+    "filas_test_con_entrada_en_train_o_val": 8541,
+    "pct_test_solapado": 0.1037,
+    "grupos_train_val_compartidos": 0,
+    "nota": "El test comparte entradas con train/val; el desempeño en test puede ser optimista. No se usaron etiquetas de test."
+  },
+  "esquema_train_igual_test": true
+}
