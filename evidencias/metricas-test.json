@@ -1,0 +1,29 @@
+{
+  "version": "v2",
+  "model_sha256": "bc3ef11203251dd11cc675b8352f353eb4d59057da7131c067d88c737b1ea589",
+  "hf_revision_sha": "644440c0402aee79dfca7589a28cb05af23ad538",
+  "dataset": "UNSW_NB15_testing-set.csv",
+  "dataset_sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+  "filas_evaluadas": 82332,
+  "umbral": 0.5338622443592118,
+  "regla": "y_pred = 1 si score_attack >= umbral",
+  "clase_positiva": "ataque (label=1)",
+  "denominador_cero": "0.0",
+  "matriz_confusion": {
+    "tn": 31145,
+    "fp": 5855,
+    "fn": 1484,
+    "tp": 43848
+  },
+  "metricas": {
+    "recall": 0.9672637430512662,
+    "precision": 0.8822002696014325,
+    "fpr": 0.15824324324324324,
+    "macro_f1": 0.9086871672107584,
+    "f1_attack": 0.922775819434945,
+    "accuracy": 0.9108609046300344
+  },
+  "seleccion_congelada_commit": "8f033c8fa66785548881d9663f72658c441d077b",
+  "evaluado_utc": "2026-10-30T20:14:08+00:00",
+  "advertencia": "El 10.4% de las filas de test repite entradas de train/val; dataset historico; no demuestra eficacia en redes actuales."
+}

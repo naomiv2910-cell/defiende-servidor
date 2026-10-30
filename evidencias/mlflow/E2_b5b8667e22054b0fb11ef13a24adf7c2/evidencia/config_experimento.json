@@ -1,0 +1,14 @@
+{
+  "id": "E2",
+  "name": "logistica_balanceada",
+  "family": "regresion_logistica",
+  "model": "LogisticRegression",
+  "scale": true,
+  "params": {
+    "C": 1.0,
+    "max_iter": 1000,
+    "class_weight": "balanced"
+  },
+  "hypothesis": "Ponderar las clases por frecuencia inversa reduce la tasa de falsos positivos (trafico normal marcado como ataque) a costa de algo de recall.\n",
+  "change": "class_weight null -> balanced (respecto a E1)."
+}

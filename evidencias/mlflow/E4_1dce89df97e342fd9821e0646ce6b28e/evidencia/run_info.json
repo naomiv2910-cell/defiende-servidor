@@ -1,0 +1,32 @@
+{
+  "run_id": "1dce89df97e342fd9821e0646ce6b28e",
+  "exp_id": "E4",
+  "model_sha256": "bc3ef11203251dd11cc675b8352f353eb4d59057da7131c067d88c737b1ea589",
+  "git_commit": "721c5ae0065a299464c22f215f07f756f76edb70",
+  "data_version": "dvc:raw=fe93051ae209ffb0128a31e7a478c009.dir;prepared=5b21ed8d12b33a8c75ef0ef726054edf.dir",
+  "tuned_threshold": 0.5338622443592118,
+  "metrics_threshold_0.5": {
+    "tn": 10586,
+    "fp": 614,
+    "fn": 1220,
+    "tp": 22649,
+    "recall": 0.9488876785789099,
+    "precision": 0.9736061556978893,
+    "fpr": 0.05482142857142857,
+    "f1_attack": 0.9610880081473309,
+    "macro_f1": 0.9406848368998847,
+    "accuracy": 0.9477030996036385
+  },
+  "metrics_tuned": {
+    "tn": 10640,
+    "fp": 560,
+    "fn": 1362,
+    "tp": 22507,
+    "recall": 0.9429385395282585,
+    "precision": 0.9757228941778298,
+    "fpr": 0.05,
+    "f1_attack": 0.9590506221237429,
+    "macro_f1": 0.9381064678586993,
+    "accuracy": 0.9451937608714249
+  }
+}

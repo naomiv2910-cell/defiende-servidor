@@ -1,0 +1,29 @@
+{
+  "python": "3.12.16 | packaged by conda-forge | (main, Oct 26 2026, 11:29:01) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "sklearn": "1.8.0",
+  "n_entradas": 25,
+  "tolerancia": 1e-09,
+  "hf_cache_dir": "C:\\Users\\Usuario\\AppData\\Local\\Temp\\hf_cache_nueva_1c1f9g3p",
+  "versiones": {
+    "v1": {
+      "revision": "local:hf_v1",
+      "model_sha256": "52fcd1592b573c074bf432be60235b1d1c05bfe34b2c50d7e3904de6464d569b",
+      "hash_coincide_con_config": true,
+      "umbral": 0.5,
+      "predicciones_identicas": true,
+      "max_dif_score": 1.1102230246251565e-16,
+      "ok": true
+    },
+    "v2": {
+      "revision": "local:hf_v2",
+      "model_sha256": "bc3ef11203251dd11cc675b8352f353eb4d59057da7131c067d88c737b1ea589",
+      "hash_coincide_con_config": true,
+      "umbral": 0.5338622443592118,
+      "predicciones_identicas": true,
+      "max_dif_score": 2.220446049250313e-16,
+      "ok": true
+    }
+  },
+  "resultado_global": "OK"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "E4",
+  "name": "bosque_aleatorio",
+  "family": "arboles",
+  "model": "RandomForestClassifier",
+  "scale": false,
+  "params": {
+    "n_estimators": 100,
+    "max_depth": 18,
+    "min_samples_leaf": 3,
+    "class_weight": "balanced_subsample",
+    "n_jobs": -1
+  },
+  "hypothesis": "Promediar muchos arboles reduce la varianza del arbol unico y mejora recall con FPR controlada.\n",
+  "change": "Arbol individual -> ensamble de 100 arboles (respecto a E3)."
+}

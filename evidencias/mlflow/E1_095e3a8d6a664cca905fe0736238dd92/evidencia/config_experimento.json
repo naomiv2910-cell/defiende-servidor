@@ -1,0 +1,14 @@
+{
+  "id": "E1",
+  "name": "logistica_base",
+  "family": "regresion_logistica",
+  "model": "LogisticRegression",
+  "scale": true,
+  "params": {
+    "C": 1.0,
+    "max_iter": 1000,
+    "class_weight": null
+  },
+  "hypothesis": "Referencia sencilla. Un modelo lineal con variables escaladas separa razonablemente normal/ataque; esperamos recall alto pero FPR notable porque el entrenamiento tiene mas ataques que trafico normal.\n",
+  "change": "Ninguno (linea base)."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "E3",
+  "name": "arbol_decision",
+  "family": "arboles",
+  "model": "DecisionTreeClassifier",
+  "scale": false,
+  "params": {
+    "max_depth": 10,
+    "min_samples_leaf": 5,
+    "class_weight": null
+  },
+  "hypothesis": "Un arbol captura interacciones no lineales y umbrales (p. ej. ct_state_ttl, sttl) que el modelo lineal no ve, mejorando macro-F1 y FPR.\n",
+  "change": "Cambio de familia (lineal -> arbol)."
+}

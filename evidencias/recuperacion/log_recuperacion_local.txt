@@ -1,0 +1,4 @@
+Python 3.12.16 | scikit-learn 1.8.0 | cache HF: C:\Users\Usuario\AppData\Local\Temp\hf_cache_nueva_1c1f9g3p
+v1: revision=hf_v1 hash_ok=True predicciones_identicas=True max_dif_score=1.110e-16 -> OK
+v2: revision=hf_v2 hash_ok=True predicciones_identicas=True max_dif_score=2.220e-16 -> OK
+RESULTADO GLOBAL: OK
