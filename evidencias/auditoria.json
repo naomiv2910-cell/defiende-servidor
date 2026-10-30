@@ -1,7 +1,7 @@
 {
   "fuentes": {
-    "C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_training-set.csv": {
-      "ruta": "data/raw/C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_training-set.csv",
+    "UNSW_NB15_training-set.csv": {
+      "ruta": "data/raw/UNSW_NB15_training-set.csv",
       "fuente": "UNSW-NB15 (UNSW Canberra). Copia fija (mirror de terceros) enlazada en el taller; atribución: página oficial de UNSW.",
       "fecha_descarga": "2026-10-28",
       "sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
@@ -24,8 +24,8 @@
         "str": 4
       }
     },
-    "C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_testing-set.csv": {
-      "ruta": "data/raw/C:\\Users\\Usuario\\Documents\\taller_defiende_mlops\\data\\UNSW_NB15_testing-set.csv",
+    "UNSW_NB15_testing-set.csv": {
+      "ruta": "data/raw/UNSW_NB15_testing-set.csv",
       "fuente": "UNSW-NB15 (UNSW Canberra). Copia fija (mirror de terceros) enlazada en el taller; atribución: página oficial de UNSW.",
       "fecha_descarga": "2026-10-28",
       "sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
