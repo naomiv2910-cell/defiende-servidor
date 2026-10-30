@@ -1,68 +1,98 @@
-# Defiende el servidor — Versionado de código, datos, experimentos y modelos
-Clasificación binaria normal/ataque (UNSW-NB15) con Git/GitHub, DVC, MLflow y Hugging Face Hub. Curso MLOps 2026-II.
+# Defiende el servidor
 
-**Python 3.11 o superior** (probado con 3.12). Dependencias fijadas en `requirements.txt`.
+Clasificación binaria normal (`0`) / ataque (`1`) sobre UNSW-NB15. El proyecto registra experimentos con MLflow y prepara modelos para Hugging Face Hub.
 
-## 1. Instalación
+Repositorio: <https://github.com/naomiv2910-cell/defiende-servidor>
 
-### Con Conda (recomendado)
-```bash
+## Requisitos e instalación
+
+El entorno Conda del proyecto usa Python 3.12. Para reproducirlo:
+
+```powershell
 conda env create -f environment.yml
 conda activate defiende-servidor
-```
-
-Para registrar el ambiente como kernel de Jupyter/VS Code:
-```bash
 python -m ipykernel install --user --name defiende-servidor --display-name "Python (defiende-servidor)"
 ```
 
-Si actualizas las dependencias, sincroniza `environment.yml` con `requirements.txt`. Para recrear el ambiente después de esos cambios:
-```bash
-conda env update -f environment.yml --prune
-```
+Alternativa con `venv`:
 
-### Alternativa con `venv`
-```bash
-git clone https://github.com/<usuario>/<repo>.git && cd <repo>
+```powershell
 python -m venv .venv
-source .venv/bin/activate          # Windows PowerShell: .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
-## 2. Recuperar los datos (DVC)
-```bash
-dvc pull                           # descarga data/raw (originales) y data/prepared (preparados + splits) desde el remote DVC
-```
-Remote DVC: `<COMPLETAR: ubicación y forma de acceso>` (ver `entrega.md`). Verifica huellas: `sha256sum data/raw/*.csv` (Windows: `Get-FileHash data\raw\*.csv`) y compáralas con `evidencias/auditoria.json`.
-Si empiezas sin DVC: copia `UNSW_NB15_training-set.csv` y `UNSW_NB15_testing-set.csv` en `data/raw/` y ejecuta las secciones 2–4 del cuaderno.
+Si cambias las dependencias, mantén sincronizados `environment.yml` y `requirements.txt`.
 
-## 3. Ejecutar un experimento
-```bash
-python -m src.run_experiment --id E1      # E1..E4, definidos en configs/experimentos.yaml
-mlflow ui --backend-store-uri sqlite:///mlflow.db     # opcional: ver los runs en http://127.0.0.1:5000
-```
-Todo el flujo (auditoría, splits, 4 experimentos, v1/v2, test) está en `Defiende_el_servidor.ipynb`; ejecútalo en orden desde la raíz del proyecto.
+## Datos y DVC
 
-## 4. Descargar un modelo y predecir
-```python
-import json, joblib, pandas as pd
-from huggingface_hub import snapshot_download
-path = snapshot_download("<usuario>/<repo-hf>", revision="<SHA_COMPLETO_V1_o_V2>")   # SHA de 40 caracteres
-cfg  = json.load(open(f"{path}/config.json")); pipe = joblib.load(f"{path}/model.joblib")
-df   = pd.read_csv("evidencias/recuperacion/entradas_validacion.csv")
-score = pipe.predict_proba(df[cfg["feature_columns"]])[:, 1]
-y_pred = (score >= cfg["threshold"]).astype(int)     # 1 = ataque
+En la copia de trabajo actual, los archivos originales están en `data/` y los datos preparados y particiones en `data/prepared/`. Aún no hay una configuración de remote DVC ni archivos `.dvc`; por eso `dvc pull` no está listo y los metadatos de los experimentos muestran que falta registrar la versión DVC.
+
+Antes de publicar una entrega reproducible, mueve/versiona los datos originales y preparados con DVC, configura un almacenamiento accesible para el equipo y actualiza `entrega.md`. No incluyas los CSV grandes directamente en GitHub. Comprueba los SHA-256 con:
+
+```powershell
+Get-FileHash data\UNSW_NB15_training-set.csv -Algorithm SHA256
+Get-FileHash data\UNSW_NB15_testing-set.csv -Algorithm SHA256
 ```
 
-## 5. Prueba de recuperación (entorno nuevo)
-```bash
-python -m src.recuperar --repo-id <usuario>/<repo-hf> --v1-sha <SHA_V1> --v2-sha <SHA_V2>
-```
-Escribe `evidencias/recuperacion/log_recuperacion.txt`, `resultado_recuperacion.json` y las salidas recuperadas de v1 y v2.
+## Ejecutar experimentos
 
-## Estructura
+El cuaderno principal está en la raíz y contiene el flujo de auditoría, preparación, comparación de modelos y evaluación:
+
+```text
+Defiende_el_servidor.ipynb
 ```
-src/ (common.py, run_experiment.py, bundle.py, recuperar.py)   configs/experimentos.yaml
-data/raw.dvc  data/prepared.dvc  .dvc/  evidencias/  Defiende_el_servidor.ipynb  entrega.md
+
+Ejecuta sus celdas en orden desde la raíz del proyecto. Para ejecutar una configuración ya preparada y registrarla en MLflow:
+
+```powershell
+python -m src.run_experiment --id E1
+python -m src.run_experiment --id E4 --max-fpr 0.05
 ```
-Cadena de trazabilidad: commit Git → referencia DVC → run ID MLflow → SHA de Hugging Face (ver `entrega.md`).
+
+Los identificadores `E1`–`E4` y sus parámetros están en `configs/experimentos.yaml`. Este comando requiere `data/prepared/train.csv` y `data/prepared/val.csv`; no lee ni modifica el conjunto de test.
+
+Para consultar los runs locales:
+
+```powershell
+mlflow ui --backend-store-uri sqlite:///mlflow.db
+```
+
+## Publicar y recuperar modelos
+
+`src/bundle.py` contiene la creación del paquete del modelo y su publicación en Hugging Face Hub; usa una sesión autenticada y un repositorio de modelos que pertenezca al equipo. No guardes tokens en el repositorio.
+
+La prueba de recuperación de `src.recuperar` requiere un directorio con `entradas_validacion.csv` y las salidas originales de v1/v2. Cuando esos archivos existan:
+
+```powershell
+python -m src.recuperar --repo-id USUARIO/REPOSITORIO-HF --v1-sha SHA_COMPLETO_V1 --v2-sha SHA_COMPLETO_V2
+```
+
+Usa SHA completos de 40 caracteres. La prueba descarga ambas revisiones en una caché temporal, comprueba los hashes y compara predicciones y scores. La prueba local con `--local-v1` y `--local-v2` sirve para depurar, pero no sustituye la recuperación desde Hugging Face.
+
+## Evidencias y entrega
+
+`evidencias/auditoria.json`, `evidencias/experimentos.csv` y las figuras actuales documentan el trabajo disponible. La selección final, las métricas de test y los archivos para la prueba de recuperación deben completarse antes de considerar cerrada la entrega. Los contratos de esos archivos están descritos en [evidencias/README.md](evidencias/README.md), y [entrega.md](entrega.md) funciona como índice.
+
+Ejecuta la revisión estructural antes de entregar:
+
+```powershell
+python scripts/check_delivery.py
+```
+
+La revisión informa como advertencias sobre datos/evidencias que aún falten; no inventa resultados ni configura servicios externos.
+
+## Estructura principal
+
+```text
+configs/experimentos.yaml        Configuraciones E1–E4
+data/                            Datos originales y preparados de la copia local
+evidencias/                      Auditoría, resultados y figuras
+src/common.py                    Métricas, preprocesamiento y utilidades
+src/run_experiment.py            Entrenamiento y registro en MLflow
+src/bundle.py                    Paquetes y publicación de modelos
+src/recuperar.py                 Prueba de recuperación de v1/v2
+Defiende_el_servidor.ipynb       Flujo de trabajo principal
+```
+
+La trazabilidad esperada es `commit Git → referencia DVC → run ID MLflow → SHA de Hugging Face`. La referencia DVC seguirá pendiente hasta que el equipo configure DVC y versione los datos.
