@@ -1,0 +1,46 @@
+{
+  "version_elegida": "v2",
+  "exp_id": "E4",
+  "run_id": "1dce89df97e342fd9821e0646ce6b28e",
+  "git_commit_modelo": "721c5ae0065a299464c22f215f07f756f76edb70",
+  "referencia_dvc": "dvc:raw=fe93051ae209ffb0128a31e7a478c009.dir;prepared=5b21ed8d12b33a8c75ef0ef726054edf.dir",
+  "huggingface": {
+    "repo_id": "LemonBynon/defiende-el-servidor-unsw",
+    "sha_v2": "644440c0402aee79dfca7589a28cb05af23ad538",
+    "sha_v1": "49799fffdb15a4129a8e87ff28c81385bf8633a9"
+  },
+  "model_sha256": "bc3ef11203251dd11cc675b8352f353eb4d59057da7131c067d88c737b1ea589",
+  "umbral": 0.5338622443592118,
+  "regla_umbral": "y_pred = 1 si score_attack >= umbral",
+  "criterio": "maximizar recall de ataque con FPR <= 0.05 en VALIDACION; desempate por macro-F1",
+  "razon": "Revisión basada en los experimentos: modelo **RandomForestClassifier** (experimento E4) y **umbral 0.5339** elegido en validación para maximizar el recall con FPR ≤ 5%. Frente a v1 mejora: precision, macro_f1, fpr (menor); empeora: recall.",
+  "metricas_validacion": {
+    "tn": 10640,
+    "fp": 560,
+    "fn": 1362,
+    "tp": 22507,
+    "recall": 0.9429385395282585,
+    "precision": 0.9757228941778298,
+    "fpr": 0.05,
+    "f1_attack": 0.9590506221237429,
+    "macro_f1": 0.9381064678586993,
+    "accuracy": 0.9451937608714249
+  },
+  "metricas_validacion_v1": {
+    "tn": 9274,
+    "fp": 1926,
+    "fn": 292,
+    "tp": 23577,
+    "recall": 0.9877665591352801,
+    "precision": 0.9244794730031761,
+    "fpr": 0.1719642857142857,
+    "f1_attack": 0.9550757514380621,
+    "macro_f1": 0.9241332720399402,
+    "accuracy": 0.93675325786307
+  },
+  "congelacion": {
+    "fecha_utc": "2026-10-30T20:13:24+00:00",
+    "tag_git": "seleccion-congelada",
+    "nota": "Commit/tag con fecha previo a cualquier evaluacion en test. No se modifica."
+  }
+}
