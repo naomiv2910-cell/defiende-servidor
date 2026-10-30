@@ -1,0 +1,4 @@
+[core]
+    remote = storage
+['remote "storage"']
+    url = https://dagshub.com/davidprogramacion04-arch/data_taller_versiones.dvc
